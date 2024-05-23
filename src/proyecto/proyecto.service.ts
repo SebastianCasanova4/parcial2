@@ -10,4 +10,8 @@ export class ProyectoService {
         private readonly proyectoRepository: Repository<ProyectoEntity>
     ){}
 
+    async crearProyecto(proyecto: ProyectoEntity): Promise<ProyectoEntity> {
+        return await this.proyectoRepository.save(proyecto);
+    }
+
 }

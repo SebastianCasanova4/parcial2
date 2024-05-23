@@ -11,11 +11,11 @@ export class PropuestaService {
         private readonly propuestaRepository: Repository<PropuestaEntity>
     ){}
 
-    async create(propuesta: PropuestaEntity): Promise<PropuestaEntity> {
+    async crearPropuesta(propuesta: PropuestaEntity): Promise<PropuestaEntity> {
         return await this.propuestaRepository.save(propuesta);
     }
 
-    async findOne(id: string): Promise<PropuestaEntity> {
+    async findPropuestaById(id: string): Promise<PropuestaEntity> {
         const propuesta: PropuestaEntity = await this.propuestaRepository.findOne({where: {id}, relations: ["artworks", "exhibitions"] } );
         if (!propuesta)
           throw new BusinessLogicException("The propuesta with the given id was not found", BusinessError.NOT_FOUND);
@@ -23,11 +23,11 @@ export class PropuestaService {
         return propuesta;
     }
 
-    async findAll(): Promise<PropuestaEntity[]> {
+    async findAllPropuesta(): Promise<PropuestaEntity[]> {
         return await this.propuestaRepository.find({ relations: ["artworks", "exhibitions"] });
     }
 
-    async delete(id: string) {
+    async deletePropuesta(id: string) {
         const propuesta: PropuestaEntity = await this.propuestaRepository.findOne({where:{id}});
         if (!propuesta)
           throw new BusinessLogicException("The propuesta with the given id was not found", BusinessError.NOT_FOUND);
