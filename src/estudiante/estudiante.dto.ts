@@ -1,8 +1,20 @@
-import {IsNotEmpty, IsString, IsUrl} from 'class-validator';
+import {IsNotEmpty, IsNumber, IsString, IsUrl} from 'class-validator';
 
 export class EstudianteDto {
     @IsString()
     @IsNotEmpty()
     readonly id: string;
-     //Hay que hacer lo mismo para todos los dto y todas las variables
+
+    @IsString()
+    @IsNotEmpty()
+    readonly nombre: string;
+
+    @IsString()
+    @IsNotEmpty()
+    readonly codigo: string;
+
+    @IsNumber()
+    @IsNotEmpty()
+    readonly creditosAprobados: number;
+    
 }

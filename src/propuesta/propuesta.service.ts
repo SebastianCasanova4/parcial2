@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PropuestaEntity } from './propuesta.entity';
 import { Repository } from 'typeorm';
-import { BusinessError, BusinessLogicException } from 'src/shared/business-errors';
+import { BusinessError, BusinessLogicException } from '../shared/business-errors';
 
 @Injectable()
 export class PropuestaService {
@@ -12,13 +12,14 @@ export class PropuestaService {
     ){}
 
     async crearPropuesta(propuesta: PropuestaEntity): Promise<PropuestaEntity> {
+        if(propuesta.titulo !== "" && propuesta.titulo !== null)
         return await this.propuestaRepository.save(propuesta);
     }
 
     async findPropuestaById(id: string): Promise<PropuestaEntity> {
         const propuesta: PropuestaEntity = await this.propuestaRepository.findOne({where: {id}, relations: ["artworks", "exhibitions"] } );
         if (!propuesta)
-          throw new BusinessLogicException("The propuesta with the given id was not found", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("La propuesta con el id dado no existe", BusinessError.NOT_FOUND);
    
         return propuesta;
     }
@@ -30,8 +31,10 @@ export class PropuestaService {
     async deletePropuesta(id: string) {
         const propuesta: PropuestaEntity = await this.propuestaRepository.findOne({where:{id}});
         if (!propuesta)
-          throw new BusinessLogicException("The propuesta with the given id was not found", BusinessError.NOT_FOUND);
-     
+            throw new BusinessLogicException("La propuesta con el id dado no existe", BusinessError.NOT_FOUND);
+        if (propuesta.proyecto !== null)
+            throw new BusinessLogicException("La propuesta tiene un proyecto asociado", BusinessError.BAD_REQUEST);
+
         await this.propuestaRepository.remove(propuesta);
     }
 

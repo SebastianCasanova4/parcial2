@@ -1,6 +1,6 @@
 import { EstudianteEntity } from "../estudiante/estudiante.entity";
 import { PropuestaEntity } from "../propuesta/propuesta.entity";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class ProyectoEntity {
@@ -20,5 +20,6 @@ export class ProyectoEntity {
     estudiante: EstudianteEntity;
 
     @OneToOne( () => PropuestaEntity, propuesta => propuesta.proyecto)
+    @JoinColumn()
     propuesta: PropuestaEntity;
 }
