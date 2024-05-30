@@ -8,10 +8,10 @@ export class ProyectoEntity {
     id: string;
 
     @Column()
-    fechaInicio: Date;
+    fechaInicio: string;
 
     @Column()
-    fechaFin: Date;
+    fechaFin: string;
 
     @Column()
     url: string;

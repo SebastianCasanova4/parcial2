@@ -3,11 +3,11 @@ import { IsNotEmpty, IsString, IsUrl } from "class-validator";
 export class ProyectoDto {
     @IsString()
     @IsNotEmpty()
-    fechaInicio: Date;
+    fechaInicio: string;
 
     @IsString()
     @IsNotEmpty()
-    fechaFin: Date;
+    fechaFin: string;
 
     @IsUrl()
     @IsNotEmpty()

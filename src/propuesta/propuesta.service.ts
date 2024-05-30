@@ -17,7 +17,7 @@ export class PropuestaService {
     }
 
     async findPropuestaById(id: string): Promise<PropuestaEntity> {
-        const propuesta: PropuestaEntity = await this.propuestaRepository.findOne({where: {id}, relations: ["artworks", "exhibitions"] } );
+        const propuesta: PropuestaEntity = await this.propuestaRepository.findOne({where: {id}, relations: ["proyecto", "profesor"] } );
         if (!propuesta)
           throw new BusinessLogicException("La propuesta con el id dado no existe", BusinessError.NOT_FOUND);
    
@@ -25,7 +25,7 @@ export class PropuestaService {
     }
 
     async findAllPropuesta(): Promise<PropuestaEntity[]> {
-        return await this.propuestaRepository.find({ relations: ["artworks", "exhibitions"] });
+        return await this.propuestaRepository.find({ relations: ["proyecto", "profesor"] });
     }
 
     async deletePropuesta(id: string) {

@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, UseInterceptors } from '@nestjs/common';
 import { PropuestaService } from './propuesta.service';
 import { plainToInstance } from 'class-transformer';
 import { PropuestaDto } from './propuesta.dto';
 import { PropuestaEntity } from './propuesta.entity';
+import { BusinessErrorsInterceptor } from 'src/shared/business-errors.interceptor';
 
 @Controller('propuesta')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class PropuestaController {
     constructor(private readonly propuestaService: PropuestaService) {}
 
