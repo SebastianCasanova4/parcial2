@@ -1,0 +1,575 @@
+{
+	"info": {
+		"_postman_id": "36ccb2a1-144c-4435-8527-5ed8c4edf418",
+		"name": "Parcial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31430148",
+		"_collection_link": "https://gold-spaceship-654512.postman.co/workspace/pruebasAPI~77b11a3e-f943-4ea0-8160-32476ab70883/collection/31430148-36ccb2a1-144c-4435-8527-5ed8c4edf418?action=share&source=collection_link&creator=31430148"
+	},
+	"item": [
+		{
+			"name": "Profesor",
+			"item": [
+				{
+					"name": "Add a profesor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()\r",
+									"pm.globals.set(\"profesorID\", data.id);\r",
+									"pm.globals.set(\"profesorCed\", data.cedula);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"   pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cedula\": 123456789,\r\n    \"nombre\": \"camilo\",\r\n    \"grupoInvestigacion\": \"COMIT\",\r\n    \"numExtension\": 123\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/profesor",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profesor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one profesores",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profesor/{{profesorID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profesor",
+								"{{profesorID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an invalid profesor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"   pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function () {\r",
+									"   var data = pm.response.json();\r",
+									"   pm.expect(data.message).to.eql(\"El profesor con el id dado no existe\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profesor/0518a200-2524-44ed-9774-6b7f58f292a8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profesor",
+								"0518a200-2524-44ed-9774-6b7f58f292a8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a profesor by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"   pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profesor/{{profesorID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profesor",
+								"{{profesorID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an invalid profesor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"   pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function () {\r",
+									"   var data = pm.response.json();\r",
+									"   pm.expect(data.message).to.eql(\"El profesor con el id dado no existe\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profesor/0518a200-2524-44ed-9774-6b7f58f292a8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profesor",
+								"0518a200-2524-44ed-9774-6b7f58f292a8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Propuesta",
+			"item": [
+				{
+					"name": "Add a propuestas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()\r",
+									"pm.globals.set(\"propuestaID\", data.id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"   pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"proyecto\",\r\n    \"descripcion\": \"descripcion proyecto\",\r\n    \"palabraClave\": \"proyecto\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/propuesta",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"propuesta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all propuestas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Number of propuestas > ' + 0, function () {\r",
+									"   var data = pm.response.json()\r",
+									"   pm.expect(data.length).to.greaterThan(0)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/propuesta",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"propuesta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one propuestas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/propuesta/{{propuestaID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"propuesta",
+								"{{propuestaID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an invalid propuesta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"   pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function () {\r",
+									"   var data = pm.response.json();\r",
+									"   pm.expect(data.message).to.eql(\"La propuesta con el id dado no existe\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/propuesta/0518a200-2524-44ed-9774-6b7f58f292a8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"propuesta",
+								"0518a200-2524-44ed-9774-6b7f58f292a8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an invalid propuesta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"   pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function () {\r",
+									"   var data = pm.response.json();\r",
+									"   pm.expect(data.message).to.eql(\"La propuesta tiene un proyecto asociado\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/propuesta/{{propuestaID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"propuesta",
+								"{{propuestaID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Proyecto",
+			"item": [
+				{
+					"name": "Add a proyecto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()\r",
+									"pm.globals.set(\"museum_id\", data.id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"   pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fechaInicio\": \"20/05/2024\",\r\n    \"fechaFin\": \"24/05/2024\",\r\n    \"url\": \"proyecto.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/proyecto",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"proyecto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estudiante",
+			"item": [
+				{
+					"name": "Add a estudiante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()\r",
+									"pm.globals.set(\"estudianteID\", data.id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"   pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Sebastian Casanova\",\r\n    \"codigo\": \"2021151160\",\r\n    \"creditosAprobados\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/estudiantes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one estudiante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/estudiantes/{{estudianteID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"estudiantes",
+								"{{estudianteID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an invalid estudiante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"   pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function () {\r",
+									"   var data = pm.response.json();\r",
+									"   pm.expect(data.message).to.eql(\"El estudiante con el id dado no existe\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/estudiantes/0518a200-2524-44ed-9774-6b7f58f292a8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"estudiantes",
+								"0518a200-2524-44ed-9774-6b7f58f292a8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.globals.set(\"baseURL\", \"http://localhost:3000/api/v1\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
