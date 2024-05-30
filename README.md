@@ -23,7 +23,7 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Descripción postman
-Se realizaron pruebas para cada uno de los métodos de los controladores. Teniendo en cuenta los casos positivos y negativos y sus códigos HTTP. Confirmando que las verificaciones estuvieran bien hechas y los codigos de error fueran los esperados. [Archivo]()
+Se realizaron pruebas para cada uno de los métodos de los controladores. Teniendo en cuenta los casos positivos y negativos y sus códigos HTTP. Confirmando que las verificaciones estuvieran bien hechas y los codigos de error fueran los esperados. [Archivo](https://github.com/SebastianCasanova4/parcial2/blob/master/Parcial.postman_collection.json)
 
 ## Description
 
